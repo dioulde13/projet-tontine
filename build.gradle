@@ -1,0 +1,67 @@
+plugins {
+	// Active le support de base pour compiler du code Java
+	id 'java'
+	// Plugin Spring Boot : ajoute les tâches bootRun, bootJar, etc. et gère les versions des dépendances Spring
+	id 'org.springframework.boot' version '4.1.1'
+	// Gère automatiquement les versions compatibles entre elles des dépendances (évite les conflits de version)
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+// Identifiant du groupe/organisation du projet (convention Maven/Gradle)
+group = 'gn.projet'
+// Version actuelle du projet lui-même
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		// Force la compilation avec Java 21, peu importe la version installée sur la machine
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+repositories {
+	// Dépôt Maven Central : source où Gradle télécharge toutes les bibliothèques ci-dessous
+	mavenCentral()
+}
+
+dependencies {
+	// Spring Data JPA : permet de communiquer avec la base de données via des entités Java (Hibernate inclus)
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	// Spring MVC : permet de créer des contrôleurs REST (@RestController, @GetMapping, etc.) et lance Tomcat
+	implementation 'org.springframework.boot:spring-boot-starter-webmvc'
+	// Springdoc : génère automatiquement la documentation OpenAPI et affiche l'interface Swagger UI
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:3.1.1'
+	// Spring Security : protège les routes, gère l'authentification/autorisation, fournit BCryptPasswordEncoder
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	// jjwt : bibliothèque pour créer et vérifier des tokens JWT
+	implementation 'io.jsonwebtoken:jjwt-api:0.12.6'
+	// Implémentation concrète de jjwt-api, nécessaire à l'exécution mais pas à la compilation de notre code
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.6'
+	// Permet à jjwt de sérialiser/désérialiser le contenu des tokens en JSON via Jackson
+	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.6'
+	// Lombok : génère automatiquement getters/setters/constructeurs via annotations (@Data, etc.)
+	// "compileOnly" = utilisé seulement à la compilation, pas inclus dans le jar final
+	compileOnly 'org.projectlombok:lombok'
+	// Devtools : redémarre automatiquement l'application quand le code change (confort en développement)
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	// Driver MySQL : nécessaire à l'exécution pour que Java sache parler au serveur MySQL
+	// "runtimeOnly" = pas besoin à la compilation, seulement quand l'app tourne
+	runtimeOnly 'com.mysql:mysql-connector-j'
+	// Indique à Java d'exécuter le générateur de code de Lombok pendant la compilation
+	annotationProcessor 'org.projectlombok:lombok'
+	// Dépendances de test pour JPA (base en mémoire, contexte de test, etc.)
+	testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa-test'
+	// Dépendances de test pour les contrôleurs web (MockMvc, etc.)
+	testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
+	// Lombok disponible aussi dans le code de test
+	testCompileOnly 'org.projectlombok:lombok'
+	// Moteur qui exécute réellement les tests JUnit 5
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	// Génération de code Lombok appliquée aussi au code de test
+	testAnnotationProcessor 'org.projectlombok:lombok'
+}
+
+tasks.named('test') {
+	// Indique à Gradle d'utiliser JUnit 5 (JUnit Platform) pour exécuter les tests
+	useJUnitPlatform()
+}

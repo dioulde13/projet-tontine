@@ -1,0 +1,13 @@
+package gn.projet.cotisation;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class CotisationApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(CotisationApplication.class, args);
+	}
+
+}
