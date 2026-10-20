@@ -19,6 +19,11 @@ public record PresidentDashboardResponseDTO(
         BigDecimal montantCollecteMoisCourant,
         long nombrePenalitesNonPayees,
         BigDecimal montantTotalPenalitesNonPayees,
+        // Toutes les pénalités (payées + non payées), contrairement à montantTotalPenalitesNonPayees ci-dessus.
+        BigDecimal montantTotalPenalites,
+        // Argent réellement collecté par le village : montantTotalCollecte (paiements) + les pénalités
+        // déjà payées (elles aussi encaissées). Ne compte jamais les pénalités non payées.
+        BigDecimal montantCaisse,
         long nombreReunions,
         // null si aucune réunion n'est planifiée dans le futur
         ReunionResponseDTO prochaineReunion,

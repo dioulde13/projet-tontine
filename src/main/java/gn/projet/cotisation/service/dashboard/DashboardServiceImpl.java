@@ -95,7 +95,9 @@ public class DashboardServiceImpl implements DashboardService {
     }
 
     @Override
-    public PresidentDashboardResponseDTO getPresidentDashboard(Long villageId, Utilisateur presidentConnecte) {
+    public PresidentDashboardResponseDTO getPresidentDashboard(
+            Long villageId, Utilisateur presidentConnecte, LocalDate dateDebut, LocalDate dateFin
+    ) {
         Village village = villageAccessService.verifierEtRecupererVillageGere(villageId, presidentConnecte);
 
         LocalDate aujourdHui = LocalDate.now();
@@ -110,6 +112,8 @@ public class DashboardServiceImpl implements DashboardService {
 
         List<Paiement> paiementsDuVillage = paiementRepository.findPaiementByVillage(villageId);
 
+        // "Membres à jour / cotisation du mois" restent toujours basés sur le mois CIVIL en cours,
+        // filtre de période ou non : "être à jour ce mois-ci" n'a pas de sens sur une période arbitraire.
         List<Paiement> paiementsDuMoisCourant = paiementsDuVillage.stream()
                 .filter(p -> p.getMois() == moisCourant && p.getAnnee() == anneeCourante)
                 .toList();
@@ -119,31 +123,53 @@ public class DashboardServiceImpl implements DashboardService {
                 .distinct()
                 .count();
 
-        BigDecimal montantTotalCollecte = paiementsDuVillage.stream()
-                .map(Paiement::getMontant)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
-
         BigDecimal montantCollecteMoisCourant = paiementsDuMoisCourant.stream()
                 .map(Paiement::getMontant)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        List<Penalite> penalitesDuVillage = penaliteRepository.findByVillageId(villageId);
+        // Agrégats historiques (collecté, pénalités, réunions, taux de présence) : restreints à
+        // [dateDebut, dateFin] quand fournies (bornes incluses), "depuis toujours" sinon — même
+        // comportement qu'avant l'ajout du filtre quand aucune borne n'est passée.
+        List<Paiement> paiementsPeriode = paiementsDuVillage.stream()
+                .filter(p -> dansPeriode(p.getDatePaiement(), dateDebut, dateFin))
+                .toList();
 
-        long nombrePenalitesNonPayees = penalitesDuVillage.stream()
+        BigDecimal montantTotalCollecte = paiementsPeriode.stream()
+                .map(Paiement::getMontant)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        List<Penalite> penalitesPeriode = penaliteRepository.findByVillageId(villageId).stream()
+                .filter(p -> dansPeriode(p.getDate(), dateDebut, dateFin))
+                .toList();
+
+        long nombrePenalitesNonPayees = penalitesPeriode.stream()
                 .filter(p -> p.getStatut() == StatutPenalite.NON_PAYEE)
                 .count();
 
-        BigDecimal montantTotalPenalitesNonPayees = penalitesDuVillage.stream()
+        BigDecimal montantTotalPenalitesNonPayees = penalitesPeriode.stream()
                 .filter(p -> p.getStatut() == StatutPenalite.NON_PAYEE)
                 .map(Penalite::getMontant)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        List<Reunion> reunionsDuVillage = reunionRepository.findByVillageId(villageId);
+        BigDecimal montantTotalPenalites = penalitesPeriode.stream()
+                .map(Penalite::getMontant)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
 
+        BigDecimal montantTotalPenalitesPayees = montantTotalPenalites.subtract(montantTotalPenalitesNonPayees);
+        BigDecimal montantCaisse = montantTotalCollecte.add(montantTotalPenalitesPayees);
+
+        List<Reunion> reunionsDuVillage = reunionRepository.findByVillageId(villageId);
+        // La prochaine réunion reste celle à venir à partir de maintenant, jamais affectée par le filtre.
         Reunion prochaineReunion = prochaineReunion(reunionsDuVillage);
 
-        List<Presence> presencesDuVillage = presenceRepository.findByVillageId(villageId);
-        double tauxPresence = tauxPresence(presencesDuVillage);
+        List<Reunion> reunionsPeriode = reunionsDuVillage.stream()
+                .filter(r -> dansPeriode(r.getDateHeure().toLocalDate(), dateDebut, dateFin))
+                .toList();
+
+        List<Presence> presencesPeriode = presenceRepository.findByVillageId(villageId).stream()
+                .filter(p -> dansPeriode(p.getReunion().getDateHeure().toLocalDate(), dateDebut, dateFin))
+                .toList();
+        double tauxPresence = tauxPresence(presencesPeriode);
 
         return new PresidentDashboardResponseDTO(
                 VillageMapper.toResponseDto(village),
@@ -157,10 +183,20 @@ public class DashboardServiceImpl implements DashboardService {
                 montantCollecteMoisCourant,
                 nombrePenalitesNonPayees,
                 montantTotalPenalitesNonPayees,
-                reunionsDuVillage.size(),
+                montantTotalPenalites,
+                montantCaisse,
+                reunionsPeriode.size(),
                 prochaineReunion == null ? null : ReunionMapper.toResponseDto(prochaineReunion),
                 tauxPresence
         );
+    }
+
+    // true si `date` tombe dans [debut, fin] (bornes incluses, chacune optionnelle = illimitée).
+    private boolean dansPeriode(LocalDate date, LocalDate debut, LocalDate fin) {
+        if (debut != null && date.isBefore(debut)) {
+            return false;
+        }
+        return fin == null || !date.isAfter(fin);
     }
 
     @Override

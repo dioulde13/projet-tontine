@@ -114,6 +114,15 @@ class DashboardServiceImplTest {
         return presence;
     }
 
+    // getPresidentDashboard lit désormais p.getReunion().getDateHeure() (filtre de période) : cette
+    // variante attache une Reunion, contrairement à presence(utilisateur, present) ci-dessus (utilisée
+    // par getMembreDashboard, qui ne regarde jamais la réunion d'une présence).
+    private Presence presence(Utilisateur utilisateur, boolean present, Reunion reunion) {
+        Presence presence = presence(utilisateur, present);
+        presence.setReunion(reunion);
+        return presence;
+    }
+
     // ---------------------------------------------------------------------
     // getAdminDashboard
     // ---------------------------------------------------------------------
@@ -218,11 +227,11 @@ class DashboardServiceImplTest {
         when(reunionRepository.findByVillageId(1L)).thenReturn(List.of(reunionPassee, reunionFuture));
 
         when(presenceRepository.findByVillageId(1L)).thenReturn(List.of(
-                presence(membreAJour, true),
-                presence(membreEnRetard, false)
+                presence(membreAJour, true, reunionPassee),
+                presence(membreEnRetard, false, reunionPassee)
         ));
 
-        PresidentDashboardResponseDTO dto = dashboardService.getPresidentDashboard(1L, president);
+        PresidentDashboardResponseDTO dto = dashboardService.getPresidentDashboard(1L, president, null, null);
 
         assertThat(dto.village().id()).isEqualTo(1L);
         assertThat(dto.moisCourant()).isEqualTo(moisCourant);
@@ -235,10 +244,77 @@ class DashboardServiceImplTest {
         assertThat(dto.montantCollecteMoisCourant()).isEqualByComparingTo("10000");
         assertThat(dto.nombrePenalitesNonPayees()).isEqualTo(1L);
         assertThat(dto.montantTotalPenalitesNonPayees()).isEqualByComparingTo("1000");
+        assertThat(dto.montantTotalPenalites()).isEqualByComparingTo("1000");
+        assertThat(dto.montantCaisse()).isEqualByComparingTo("20000"); // pénalité non payée : pas encore en caisse
         assertThat(dto.nombreReunions()).isEqualTo(2);
         assertThat(dto.prochaineReunion()).isNotNull();
         assertThat(dto.prochaineReunion().lieu()).isEqualTo("Ecole du village");
         assertThat(dto.tauxPresence()).isEqualTo(50.0d);
+    }
+
+    @Test
+    void getPresidentDashboard_restreintLesAgregatsHistoriquesALaPeriodeDemandee() {
+        Utilisateur president = utilisateur(1L, "PRESIDENT");
+        Utilisateur membre = utilisateur(2L, "MEMBRE");
+
+        when(villageAccessService.verifierEtRecupererVillageGere(1L, president)).thenReturn(village);
+        when(utilisateurRepository.findByVillageId(1L)).thenReturn(List.of(membre));
+        when(configurationVillageRepository.findByVillageId(1L)).thenReturn(java.util.Optional.empty());
+
+        LocalDate dansLaPeriode = LocalDate.of(2026, 3, 15);
+        LocalDate horsPeriode = LocalDate.of(2026, 5, 1);
+
+        Paiement paiementDansLaPeriode = new Paiement();
+        paiementDansLaPeriode.setUtilisateur(membre);
+        paiementDansLaPeriode.setMois(3);
+        paiementDansLaPeriode.setAnnee(2026);
+        paiementDansLaPeriode.setMontant(new BigDecimal("10000"));
+        paiementDansLaPeriode.setDatePaiement(dansLaPeriode);
+
+        Paiement paiementHorsPeriode = new Paiement();
+        paiementHorsPeriode.setUtilisateur(membre);
+        paiementHorsPeriode.setMois(5);
+        paiementHorsPeriode.setAnnee(2026);
+        paiementHorsPeriode.setMontant(new BigDecimal("10000"));
+        paiementHorsPeriode.setDatePaiement(horsPeriode);
+
+        when(paiementRepository.findPaiementByVillage(1L))
+                .thenReturn(List.of(paiementDansLaPeriode, paiementHorsPeriode));
+
+        Penalite penaliteDansLaPeriode = penalite(membre, StatutPenalite.PAYEE, "1000");
+        penaliteDansLaPeriode.setDate(dansLaPeriode);
+        Penalite penaliteHorsPeriode = penalite(membre, StatutPenalite.NON_PAYEE, "2000");
+        penaliteHorsPeriode.setDate(horsPeriode);
+        when(penaliteRepository.findByVillageId(1L))
+                .thenReturn(List.of(penaliteDansLaPeriode, penaliteHorsPeriode));
+
+        Reunion reunionDansLaPeriode = new Reunion();
+        reunionDansLaPeriode.setVillage(village);
+        reunionDansLaPeriode.setDateHeure(dansLaPeriode.atTime(10, 0));
+        reunionDansLaPeriode.setLieu("Place du village");
+
+        Reunion reunionHorsPeriode = new Reunion();
+        reunionHorsPeriode.setVillage(village);
+        reunionHorsPeriode.setDateHeure(horsPeriode.atTime(10, 0));
+        reunionHorsPeriode.setLieu("Ecole");
+
+        when(reunionRepository.findByVillageId(1L))
+                .thenReturn(List.of(reunionDansLaPeriode, reunionHorsPeriode));
+
+        when(presenceRepository.findByVillageId(1L)).thenReturn(List.of(
+                presence(membre, true, reunionDansLaPeriode),
+                presence(membre, false, reunionHorsPeriode)
+        ));
+
+        PresidentDashboardResponseDTO dto = dashboardService.getPresidentDashboard(
+                1L, president, LocalDate.of(2026, 3, 1), LocalDate.of(2026, 3, 31));
+
+        assertThat(dto.montantTotalCollecte()).isEqualByComparingTo("10000"); // seul mars compte
+        assertThat(dto.montantTotalPenalites()).isEqualByComparingTo("1000");
+        assertThat(dto.montantTotalPenalitesNonPayees()).isEqualByComparingTo(BigDecimal.ZERO);
+        assertThat(dto.montantCaisse()).isEqualByComparingTo("11000"); // paiement + pénalité payée de mars
+        assertThat(dto.nombreReunions()).isEqualTo(1);
+        assertThat(dto.tauxPresence()).isEqualTo(100.0d); // seule la présence de mars (présent) compte
     }
 
     @Test
@@ -253,11 +329,12 @@ class DashboardServiceImplTest {
         when(reunionRepository.findByVillageId(1L)).thenReturn(List.of());
         when(presenceRepository.findByVillageId(1L)).thenReturn(List.of());
 
-        PresidentDashboardResponseDTO dto = dashboardService.getPresidentDashboard(1L, president);
+        PresidentDashboardResponseDTO dto = dashboardService.getPresidentDashboard(1L, president, null, null);
 
         assertThat(dto.montantCotisationMensuelle()).isNull();
         assertThat(dto.prochaineReunion()).isNull();
         assertThat(dto.tauxPresence()).isZero();
+        assertThat(dto.montantCaisse()).isEqualByComparingTo(BigDecimal.ZERO);
     }
 
     @Test
@@ -266,7 +343,7 @@ class DashboardServiceImplTest {
         RuntimeException refus = new RuntimeException("acces refuse");
         when(villageAccessService.verifierEtRecupererVillageGere(1L, autrePresident)).thenThrow(refus);
 
-        assertThatThrownBy(() -> dashboardService.getPresidentDashboard(1L, autrePresident))
+        assertThatThrownBy(() -> dashboardService.getPresidentDashboard(1L, autrePresident, null, null))
                 .isSameAs(refus);
 
         verify(utilisateurRepository, org.mockito.Mockito.never()).findByVillageId(any());
