@@ -10,6 +10,7 @@ import org.springframework.http.HttpMethod; // GET, POST, PUT, DELETE...
 import org.springframework.security.authentication.AuthenticationManager; // orchestre le processus d'authentification
 import org.springframework.security.authentication.AuthenticationProvider; // sait vérifier UNE identité (ici via UserDetailsService + mot de passe)
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider; // implémentation standard basée sur une base de données
+import org.springframework.security.config.Customizer; // active un module de sécurité avec sa config par défaut (ex: .cors(Customizer.withDefaults()))
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration; // fournit l'AuthenticationManager de Spring
 import org.springframework.security.config.annotation.web.builders.HttpSecurity; // API pour construire les règles de sécurité HTTP
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity; // active la config de sécurité web personnalisée
@@ -18,6 +19,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder; // impl
 import org.springframework.security.crypto.password.PasswordEncoder; // contrat pour hacher/vérifier un mot de passe
 import org.springframework.security.web.SecurityFilterChain; // résultat final : la chaîne de filtres de sécurité
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter; // filtre standard de Spring Security, utilisé comme repère de position
+import org.springframework.web.cors.CorsConfiguration; // règles CORS (origines/méthodes/en-têtes autorisés)
+import org.springframework.web.cors.CorsConfigurationSource; // contrat : fournit la config CORS applicable à une requête
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource; // implémentation standard, par motif d'URL
+
+import java.util.List;
 
 // @EnableWebSecurity active la configuration de sécurité personnalisée de Spring Security pour cette application.
 @EnableWebSecurity
@@ -63,10 +69,34 @@ public class SecurityConfig {
         return config.getAuthenticationManager();
     }
 
+    // Autorise le frontend Angular (servi sur une autre origine : localhost:4200 en dev, par exemple)
+    // à appeler cette API. Sans ça, le navigateur bloque toute requête cross-origin lui-même, AVANT
+    // même qu'elle n'atteigne un contrôleur (aucun Access-Control-Allow-Origin dans la réponse) —
+    // ce bean est lu automatiquement par .cors(Customizer.withDefaults()) ci-dessous.
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowedOrigins(List.of("http://localhost:4200"));
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+        // Pas de cookies/session ici : l'authentification se fait via un header Authorization (JWT),
+        // jamais via des credentials de navigateur (cookies) — inutile donc de les autoriser.
+        config.setAllowCredentials(false);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config); // s'applique à toutes les routes de l'API
+        return source;
+    }
+
     // Définit les règles de sécurité HTTP : quelles routes sont publiques, lesquelles exigent d'être connecté.
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                // Active le CORS Spring Security en lisant le bean CorsConfigurationSource ci-dessus.
+                // Doit être activé ICI (pas seulement comme @Bean) pour que la requête de préflight
+                // OPTIONS soit traitée AVANT les règles d'authentification plus bas (sinon elle recevrait
+                // un 401, comme n'importe quelle autre requête non authentifiée).
+                .cors(Customizer.withDefaults())
                 // CSRF protège contre des attaques liées aux sessions/cookies ; inutile ici car on est
                 // en JWT "stateless" (aucun cookie de session), donc on le désactive explicitement.
                 .csrf(csrf -> csrf.disable())
