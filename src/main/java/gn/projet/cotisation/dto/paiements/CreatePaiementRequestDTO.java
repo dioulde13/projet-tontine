@@ -1,12 +1,21 @@
 package gn.projet.cotisation.dto.paiements;
 
 import gn.projet.cotisation.entity.Mois;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.Set;
 
 public record CreatePaiementRequestDTO(
+        @NotNull(message = "Le membre est requis")
         Long utilisateurId,
+        @NotEmpty(message = "Sélectionnez au moins un mois")
         Set<Mois> mois,
+        @NotNull(message = "L'année est requise")
+        @Min(value = 2000, message = "Année invalide")
+        @Max(value = 2100, message = "Année invalide")
         Integer annee,
         // Pour les mois payés en retard (mois déjà passé au moment du paiement) : le président choisit
         // ici s'il applique ou non la pénalité de retard habituelle. Sans effet sur les mois non en

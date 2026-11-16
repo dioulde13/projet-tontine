@@ -31,7 +31,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Utilisateur {
+public class Utilisateur extends BaseEntity {
 
     // Clé primaire de la table
     @Id

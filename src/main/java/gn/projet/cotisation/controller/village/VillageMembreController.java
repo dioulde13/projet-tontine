@@ -4,6 +4,7 @@ import gn.projet.cotisation.dto.utilisateurs.CreateMembreRequestDTO; // DTO reç
 import gn.projet.cotisation.dto.utilisateurs.UtilisateurResponseDTO; // DTO renvoyé au client
 import gn.projet.cotisation.security.CustomUserDetails; // représente le président authentifié pour la requête
 import gn.projet.cotisation.service.utilisateur.UtilisateurService;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j; // génère automatiquement le champ "log" utilisé ci-dessous
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -33,7 +34,7 @@ public class VillageMembreController {
     @PostMapping
     public UtilisateurResponseDTO create(
             @PathVariable Long villageId, // {villageId} de l'URL
-            @RequestBody CreateMembreRequestDTO dto, // corps JSON -> DTO
+            @Valid @RequestBody CreateMembreRequestDTO dto, // corps JSON -> DTO
             @AuthenticationPrincipal CustomUserDetails userDetails // l'utilisateur authentifié pour cette requête
     ) {
         // {} = un "placeholder" (espace réservé) : SLF4J remplace chaque {} par l'argument correspondant,

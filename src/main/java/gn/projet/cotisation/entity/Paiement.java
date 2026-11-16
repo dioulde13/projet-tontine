@@ -29,7 +29,7 @@ import java.time.LocalDate; // type dédié pour une date sans heure (jour/mois/
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Paiement {
+public class Paiement extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

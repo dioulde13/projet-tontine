@@ -4,6 +4,7 @@ import gn.projet.cotisation.dto.penalites.PenaliteResponseDTO;
 import gn.projet.cotisation.dto.penalites.UpdatePenaliteRequestDTO;
 import gn.projet.cotisation.security.CustomUserDetails;
 import gn.projet.cotisation.service.penalite.PenaliteService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,7 @@ public class VillagePenaliteController {
     @PostMapping
     public PenaliteResponseDTO create(
             @PathVariable Long villageId,
-            @RequestBody UpdatePenaliteRequestDTO dto,
+            @Valid @RequestBody UpdatePenaliteRequestDTO dto,
             @AuthenticationPrincipal CustomUserDetails userDetails
     ) {
         return penaliteService.create(villageId, dto,

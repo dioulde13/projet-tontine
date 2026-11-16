@@ -3,6 +3,7 @@ package gn.projet.cotisation.controller.role;
 import gn.projet.cotisation.dto.roles.RoleResponseDTO; // DTO renvoyé au client
 import gn.projet.cotisation.dto.roles.UpdateRoleRequestDTO; // DTO reçu du client
 import gn.projet.cotisation.service.role.RoleService; // logique métier, injectée dans ce contrôleur
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus; // énumération des codes HTTP (200, 404, 204...)
 import org.springframework.web.bind.annotation.DeleteMapping; // route HTTP DELETE
 import org.springframework.web.bind.annotation.GetMapping; // route HTTP GET
@@ -43,13 +44,13 @@ public class RoleController {
 
     // POST /api/roles -> crée un rôle
     @PostMapping
-    public RoleResponseDTO create(@RequestBody UpdateRoleRequestDTO dto) { // JSON du corps -> UpdateRoleRequestDTO
+    public RoleResponseDTO create(@Valid @RequestBody UpdateRoleRequestDTO dto) { // JSON du corps -> UpdateRoleRequestDTO
         return roleService.create(dto); // renvoie le rôle créé (avec son id généré) en JSON
     }
 
     // PUT /api/roles/{id} -> 200 avec le rôle mis à jour, ou 404 automatique si absent
     @PutMapping("/{id}")
-    public RoleResponseDTO update(@PathVariable Long id, @RequestBody UpdateRoleRequestDTO dto) {
+    public RoleResponseDTO update(@PathVariable Long id, @Valid @RequestBody UpdateRoleRequestDTO dto) {
         return roleService.update(id, dto); // id vient de l'URL, nouvelles valeurs viennent du corps JSON
     }
 

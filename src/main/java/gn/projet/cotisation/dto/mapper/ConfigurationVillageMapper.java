@@ -8,13 +8,18 @@ import gn.projet.cotisation.entity.ConfigurationVillage;
 // même raisonnement que pour UtilisateurMapper.
 public class ConfigurationVillageMapper {
 
-    public static ConfigurationVillageResponseDTO toResponseDto(ConfigurationVillage config) {
+    // modifieParNom : nom complet déjà résolu par le service (seul endroit ayant accès à
+    // UtilisateurRepository) depuis config.getUpdatedBy() ; null si inconnu ou jamais modifiée.
+    public static ConfigurationVillageResponseDTO toResponseDto(ConfigurationVillage config, String modifieParNom) {
         return new ConfigurationVillageResponseDTO(
                 config.getId(),
                 config.getVillage().getId(), // on ne prend que l'id du village, pas l'objet complet
                 config.getMontantCotisationMensuelle(),
                 config.getMontantPenaliteRetard(),
-                config.getMontantPenaliteAbsenceReunion()
+                config.getMontantPenaliteAbsenceReunion(),
+                config.getUpdatedAt(),
+                config.getUpdatedBy(),
+                modifieParNom
         );
     }
 }

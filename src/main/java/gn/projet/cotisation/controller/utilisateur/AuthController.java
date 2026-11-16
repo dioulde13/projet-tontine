@@ -3,6 +3,7 @@ package gn.projet.cotisation.controller.utilisateur;
 import gn.projet.cotisation.security.JwtService; // génère le token une fois l'identité vérifiée
 import gn.projet.cotisation.dto.utilisateurs.LoginRequestDTO;
 import gn.projet.cotisation.dto.utilisateurs.LoginResponseDTO;
+import jakarta.validation.Valid;
 import org.springframework.security.authentication.AuthenticationManager; // orchestre la vérification d'identité
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken; // représente une tentative "email + mot de passe"
 import org.springframework.security.core.Authentication; // résultat d'une authentification réussie
@@ -28,7 +29,7 @@ public class AuthController {
 
     // POST /api/auth/login -> vérifie telephone/motDePasse, renvoie un JWT si valides
     @PostMapping("/login")
-    public LoginResponseDTO login(@RequestBody LoginRequestDTO request) {
+    public LoginResponseDTO login(@Valid @RequestBody LoginRequestDTO request) {
         // authenticate() déclenche toute la vérification : appelle CustomUserDetailsService pour charger
         // l'utilisateur par téléphone, puis compare le mot de passe fourni au hash stocké via le PasswordEncoder.
         // Si les identifiants sont incorrects, une BadCredentialsException est levée automatiquement ici

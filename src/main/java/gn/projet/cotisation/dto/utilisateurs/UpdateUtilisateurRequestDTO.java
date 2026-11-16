@@ -2,7 +2,9 @@ package gn.projet.cotisation.dto.utilisateurs;
 
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 import java.util.Set;
 
@@ -19,10 +21,17 @@ import java.util.Set;
 // que Swagger UI propose null/[] par défaut pour villageId/villagesGeresIds au lieu de 0/[0] (le défaut
 // générique de Swagger pour Long/Set<Long>), qui provoquait un 404 "village introuvable" pour un ADMIN.
 public record UpdateUtilisateurRequestDTO(
+        @NotBlank(message = "Le nom est requis")
         String nom,
+        @NotBlank(message = "Le prénom est requis")
         String prenom,
+        @NotBlank(message = "Le téléphone est requis")
         @Pattern(regexp = "^\\+?[0-9]{8,15}$", message = "Numéro de téléphone invalide")
         String telephone,
+        // null = ne pas changer le mot de passe actuel (voir UtilisateurServiceImpl.update) : @Size
+        // ne valide QUE les valeurs non nulles (convention standard de Bean Validation), donc reste
+        // sans effet quand le champ est absent — exactement le comportement souhaité ici.
+        @Size(min = 6, message = "Le mot de passe doit contenir au moins 6 caractères")
         String motDePasse,
         Set<Long> roleIds,
         @Schema(example = "null", description = "Id du village du MEMBRE. Laisser null pour ADMIN/PRESIDENT.")

@@ -26,7 +26,7 @@ import lombok.Setter;
 @NoArgsConstructor
 // Lombok génère un constructeur avec tous les champs Village(id, nom)
 @AllArgsConstructor
-public class Village {
+public class Village extends BaseEntity {
 
     // Clé primaire de la table
     @Id

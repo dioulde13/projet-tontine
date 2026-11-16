@@ -4,6 +4,7 @@ import gn.projet.cotisation.dto.recus.CreateRecuRequestDTO;
 import gn.projet.cotisation.dto.recus.RecuResponseDTO;
 import gn.projet.cotisation.security.CustomUserDetails;
 import gn.projet.cotisation.service.recu.RecuService;
+import jakarta.validation.Valid;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +23,7 @@ public class VillageRecuController {
     @PostMapping
     public RecuResponseDTO create(
             @PathVariable Long villageId,
-            @RequestBody CreateRecuRequestDTO dto,
+            @Valid @RequestBody CreateRecuRequestDTO dto,
             @AuthenticationPrincipal CustomUserDetails userDetails
     ) {
         return recuService.create(villageId, dto, userDetails.getUtilisateur());

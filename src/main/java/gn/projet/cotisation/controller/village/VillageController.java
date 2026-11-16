@@ -3,6 +3,7 @@ package gn.projet.cotisation.controller.village;
 import gn.projet.cotisation.dto.villages.UpdateVillageRequestDTO;
 import gn.projet.cotisation.dto.villages.VillageResponseDTO;
 import gn.projet.cotisation.service.village.VillageService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,13 +41,13 @@ public class VillageController {
 
     // POST /api/villages
     @PostMapping
-    public VillageResponseDTO create(@RequestBody UpdateVillageRequestDTO dto) {
+    public VillageResponseDTO create(@Valid @RequestBody UpdateVillageRequestDTO dto) {
         return villageService.create(dto);
     }
 
     // PUT /api/villages/{id}
     @PutMapping("/{id}")
-    public VillageResponseDTO update(@PathVariable Long id, @RequestBody UpdateVillageRequestDTO dto) {
+    public VillageResponseDTO update(@PathVariable Long id, @Valid @RequestBody UpdateVillageRequestDTO dto) {
         return villageService.update(id, dto);
     }
 

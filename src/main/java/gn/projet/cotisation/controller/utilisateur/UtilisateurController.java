@@ -6,6 +6,7 @@ import gn.projet.cotisation.dto.utilisateurs.UtilisateurResponseDTO; // DTO renv
 import gn.projet.cotisation.dto.villages.VillageResponseDTO;
 import gn.projet.cotisation.security.CustomUserDetails; // représente l'utilisateur authentifié pour la requête en cours
 import gn.projet.cotisation.service.utilisateur.UtilisateurService; // logique métier injectée
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus; // codes HTTP
 import org.springframework.security.core.annotation.AuthenticationPrincipal; // injecte l'utilisateur connecté
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -60,13 +61,13 @@ public class UtilisateurController {
 
     // POST /api/utilisateurs -> 409 automatique si le téléphone est déjà pris
     @PostMapping
-    public UtilisateurResponseDTO create(@RequestBody UpdateUtilisateurRequestDTO dto) { // corps JSON -> DTO
+    public UtilisateurResponseDTO create(@Valid @RequestBody UpdateUtilisateurRequestDTO dto) { // corps JSON -> DTO
         return utilisateurService.create(dto); // renvoie l'utilisateur créé (sans motDePasse)
     }
 
     // PUT /api/utilisateurs/{id}
     @PutMapping("/{id}")
-    public UtilisateurResponseDTO update(@PathVariable Long id, @RequestBody UpdateUtilisateurRequestDTO dto) {
+    public UtilisateurResponseDTO update(@PathVariable Long id, @Valid @RequestBody UpdateUtilisateurRequestDTO dto) {
         return utilisateurService.update(id, dto); // id depuis l'URL, nouvelles valeurs depuis le corps JSON
     }
 

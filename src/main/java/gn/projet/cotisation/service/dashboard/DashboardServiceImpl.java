@@ -6,6 +6,7 @@ import gn.projet.cotisation.dto.dashboard.PresidentDashboardResponseDTO;
 import gn.projet.cotisation.dto.mapper.ReunionMapper;
 import gn.projet.cotisation.dto.mapper.VillageMapper;
 import gn.projet.cotisation.entity.ConfigurationVillage;
+import gn.projet.cotisation.entity.Depense;
 import gn.projet.cotisation.entity.Paiement;
 import gn.projet.cotisation.entity.Penalite;
 import gn.projet.cotisation.entity.Presence;
@@ -15,6 +16,7 @@ import gn.projet.cotisation.entity.Utilisateur;
 import gn.projet.cotisation.entity.Village;
 import gn.projet.cotisation.exception.utilisateur.UtilisateurSansVillageException;
 import gn.projet.cotisation.repository.configurationVillage.ConfigurationVillageRepository;
+import gn.projet.cotisation.repository.depense.DepenseRepository;
 import gn.projet.cotisation.repository.paiement.PaiementRepository;
 import gn.projet.cotisation.repository.penalite.PenaliteRepository;
 import gn.projet.cotisation.repository.presence.PresenceRepository;
@@ -40,6 +42,7 @@ public class DashboardServiceImpl implements DashboardService {
     private final ReunionRepository reunionRepository;
     private final PresenceRepository presenceRepository;
     private final ConfigurationVillageRepository configurationVillageRepository;
+    private final DepenseRepository depenseRepository;
     private final VillageAccessService villageAccessService;
 
     public DashboardServiceImpl(
@@ -50,6 +53,7 @@ public class DashboardServiceImpl implements DashboardService {
             ReunionRepository reunionRepository,
             PresenceRepository presenceRepository,
             ConfigurationVillageRepository configurationVillageRepository,
+            DepenseRepository depenseRepository,
             VillageAccessService villageAccessService
     ) {
         this.villageRepository = villageRepository;
@@ -59,6 +63,7 @@ public class DashboardServiceImpl implements DashboardService {
         this.reunionRepository = reunionRepository;
         this.presenceRepository = presenceRepository;
         this.configurationVillageRepository = configurationVillageRepository;
+        this.depenseRepository = depenseRepository;
         this.villageAccessService = villageAccessService;
     }
 
@@ -156,7 +161,16 @@ public class DashboardServiceImpl implements DashboardService {
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         BigDecimal montantTotalPenalitesPayees = montantTotalPenalites.subtract(montantTotalPenalitesNonPayees);
-        BigDecimal montantCaisse = montantTotalCollecte.add(montantTotalPenalitesPayees);
+
+        List<Depense> depensesPeriode = depenseRepository.findByVillageId(villageId).stream()
+                .filter(d -> dansPeriode(d.getDate(), dateDebut, dateFin))
+                .toList();
+
+        BigDecimal montantTotalDepenses = depensesPeriode.stream()
+                .map(Depense::getMontant)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        BigDecimal montantCaisse = montantTotalCollecte.add(montantTotalPenalitesPayees).subtract(montantTotalDepenses);
 
         List<Reunion> reunionsDuVillage = reunionRepository.findByVillageId(villageId);
         // La prochaine réunion reste celle à venir à partir de maintenant, jamais affectée par le filtre.
@@ -184,6 +198,7 @@ public class DashboardServiceImpl implements DashboardService {
                 nombrePenalitesNonPayees,
                 montantTotalPenalitesNonPayees,
                 montantTotalPenalites,
+                montantTotalDepenses,
                 montantCaisse,
                 reunionsPeriode.size(),
                 prochaineReunion == null ? null : ReunionMapper.toResponseDto(prochaineReunion),

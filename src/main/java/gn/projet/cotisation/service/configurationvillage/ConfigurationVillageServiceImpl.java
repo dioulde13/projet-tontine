@@ -8,6 +8,7 @@ import gn.projet.cotisation.entity.Utilisateur;
 import gn.projet.cotisation.entity.Village;
 import gn.projet.cotisation.exception.configurationvillage.ConfigurationVillageNotFoundException;
 import gn.projet.cotisation.repository.configurationVillage.ConfigurationVillageRepository;
+import gn.projet.cotisation.repository.utilisateur.UtilisateurRepository;
 import gn.projet.cotisation.service.village.VillageAccessService;
 import org.springframework.stereotype.Service;
 
@@ -15,14 +16,28 @@ import org.springframework.stereotype.Service;
 public class ConfigurationVillageServiceImpl implements ConfigurationVillageService{
 
     private final ConfigurationVillageRepository configurationVillageRepository;
+    private final UtilisateurRepository utilisateurRepository;
     private final VillageAccessService villageAccessService;
 
     public ConfigurationVillageServiceImpl(
             ConfigurationVillageRepository configurationVillageRepository,
+            UtilisateurRepository utilisateurRepository,
             VillageAccessService villageAccessService
     ) {
         this.configurationVillageRepository = configurationVillageRepository;
+        this.utilisateurRepository = utilisateurRepository;
         this.villageAccessService = villageAccessService;
+    }
+
+    // Retrouve le nom complet (prénom + nom) de l'utilisateur portant ce téléphone, pour affichage
+    // uniquement. Null si telephone est null ou si plus personne ne le porte (ex: compte supprimé).
+    private String resoudreNomComplet(String telephone) {
+        if (telephone == null) {
+            return null;
+        }
+        return utilisateurRepository.findByTelephone(telephone)
+                .map(u -> u.getPrenom() + " " + u.getNom())
+                .orElse(null);
     }
 
     @Override
@@ -35,7 +50,7 @@ public class ConfigurationVillageServiceImpl implements ConfigurationVillageServ
         config.setMontantPenaliteAbsenceReunion(dto.montantPenaliteAbsenceReunion());
 
         ConfigurationVillage saved = configurationVillageRepository.save(config);
-        return ConfigurationVillageMapper.toResponseDto(saved);
+        return ConfigurationVillageMapper.toResponseDto(saved, resoudreNomComplet(saved.getUpdatedBy()));
     }
 
     @Override
@@ -44,7 +59,7 @@ public class ConfigurationVillageServiceImpl implements ConfigurationVillageServ
                 configurationVillageRepository.findByVillageId(villageId)
                         .orElseThrow(() -> new
                                 ConfigurationVillageNotFoundException(villageId));
-        return ConfigurationVillageMapper.toResponseDto(config);
+        return ConfigurationVillageMapper.toResponseDto(config, resoudreNomComplet(config.getUpdatedBy()));
     }
 
     @Override
@@ -59,6 +74,6 @@ public class ConfigurationVillageServiceImpl implements ConfigurationVillageServ
         config.setMontantPenaliteAbsenceReunion(dto.montantPenaliteAbsenceReunion());
 
         ConfigurationVillage saved = configurationVillageRepository.save(config);
-        return ConfigurationVillageMapper.toResponseDto(saved);
+        return ConfigurationVillageMapper.toResponseDto(saved, resoudreNomComplet(saved.getUpdatedBy()));
     }
 }

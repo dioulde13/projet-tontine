@@ -22,7 +22,7 @@ import java.time.LocalDateTime; // date ET heure (contrairement à LocalDate uti
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Reunion {
+public class Reunion extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

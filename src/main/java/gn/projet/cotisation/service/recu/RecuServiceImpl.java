@@ -12,6 +12,7 @@ import gn.projet.cotisation.exception.recu.RecuDejaExistantException;
 import gn.projet.cotisation.exception.recu.RecuNotFoundException;
 import gn.projet.cotisation.repository.paiement.PaiementRepository;
 import gn.projet.cotisation.repository.recu.RecuRepository;
+import gn.projet.cotisation.repository.utilisateur.UtilisateurRepository;
 import gn.projet.cotisation.service.village.VillageAccessService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,15 +25,18 @@ public class RecuServiceImpl implements RecuService {
 
     private final RecuRepository recuRepository;
     private final PaiementRepository paiementRepository;
+    private final UtilisateurRepository utilisateurRepository;
     private final VillageAccessService villageAccessService;
 
     public RecuServiceImpl(
             RecuRepository recuRepository,
             PaiementRepository paiementRepository,
+            UtilisateurRepository utilisateurRepository,
             VillageAccessService villageAccessService
     ) {
         this.recuRepository = recuRepository;
         this.paiementRepository = paiementRepository;
+        this.utilisateurRepository = utilisateurRepository;
         this.villageAccessService = villageAccessService;
     }
 
@@ -106,6 +110,19 @@ public class RecuServiceImpl implements RecuService {
                         && r.getPaiements().get(0).getUtilisateur().getVillage().getId().equals(villageId))
                 .orElseThrow(() -> new RecuNotFoundException(recuId));
 
-        return RecuMapper.toResponseDto(recu);
+        return RecuMapper.toResponseDto(recu, resoudreNomComplet(recu.getCreatedBy()));
+    }
+
+    // Retrouve le nom complet (prénom + nom) de l'utilisateur portant ce téléphone, pour affichage
+    // uniquement (ex: "généré par" sur le détail d'un reçu). Null si createdBy est null (reçu généré
+    // hors contexte authentifié) ou si plus aucun utilisateur ne porte ce téléphone (ex: compte
+    // supprimé depuis) — on ne lève jamais d'exception pour ça, l'affichage reste simplement moins précis.
+    private String resoudreNomComplet(String telephone) {
+        if (telephone == null) {
+            return null;
+        }
+        return utilisateurRepository.findByTelephone(telephone)
+                .map(u -> u.getPrenom() + " " + u.getNom())
+                .orElse(null);
     }
 }

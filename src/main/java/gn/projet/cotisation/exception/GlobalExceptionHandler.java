@@ -1,6 +1,7 @@
 package gn.projet.cotisation.exception;
 
 import gn.projet.cotisation.exception.configurationvillage.ConfigurationVillageNotFoundException;
+import gn.projet.cotisation.exception.depense.DepenseNotFoundException;
 import gn.projet.cotisation.exception.paiement.PaiementDejaExistantException;
 import gn.projet.cotisation.exception.paiement.PaiementNotFoundException;
 import gn.projet.cotisation.exception.penalite.PenaliteNotFoundException;
@@ -11,6 +12,8 @@ import gn.projet.cotisation.exception.recu.RecuDejaExistantException;
 import gn.projet.cotisation.exception.recu.RecuNotFoundException;
 import gn.projet.cotisation.exception.reunion.ReunionNotFoundException;
 import gn.projet.cotisation.exception.role.RoleNotFoundException;
+import gn.projet.cotisation.exception.typemouvementcaisse.TypeMouvementCaisseDejaExistantException;
+import gn.projet.cotisation.exception.typemouvementcaisse.TypeMouvementCaisseNotFoundException;
 import gn.projet.cotisation.exception.utilisateur.TelephoneDejaUtiliseException;
 import gn.projet.cotisation.exception.utilisateur.UtilisateurNotFoundException;
 import gn.projet.cotisation.exception.utilisateur.UtilisateurSansVillageException;
@@ -20,11 +23,16 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticationException; // classe parente de BadCredentialsException, etc.
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException; // levée par @Valid quand un DTO ne respecte pas ses contraintes
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException; // ex: ?dateDebut=pas-une-date
 
 import java.time.Instant;
+import java.util.Comparator;
+import java.util.stream.Collectors;
 
 // @RestControllerAdvice = un @Component spécial que Spring applique GLOBALEMENT à tous les @RestController
 // de l'application. Dès qu'une méthode de contrôleur laisse une exception remonter sans l'attraper,
@@ -102,6 +110,23 @@ public class GlobalExceptionHandler {
         return build(HttpStatus.NOT_FOUND, ex.getMessage(), request);
     }
 
+    @ExceptionHandler(TypeMouvementCaisseNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleTypeMouvementCaisseNotFound(TypeMouvementCaisseNotFoundException ex, WebRequest request) {
+        return build(HttpStatus.NOT_FOUND, ex.getMessage(), request);
+    }
+
+    // 409 Conflict : même logique que RecuDejaExistantException plus haut — un type portant ce
+    // libellé existe déjà pour ce village.
+    @ExceptionHandler(TypeMouvementCaisseDejaExistantException.class)
+    public ResponseEntity<ErrorResponse> handleTypeMouvementCaisseDejaExistant(TypeMouvementCaisseDejaExistantException ex, WebRequest request) {
+        return build(HttpStatus.CONFLICT, ex.getMessage(), request);
+    }
+
+    @ExceptionHandler(DepenseNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleDepenseNotFound(DepenseNotFoundException ex, WebRequest request) {
+        return build(HttpStatus.NOT_FOUND, ex.getMessage(), request);
+    }
+
     @ExceptionHandler(UtilisateurNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleUtilisateurNotFound(UtilisateurNotFoundException ex, WebRequest request) {
         return build(HttpStatus.NOT_FOUND, ex.getMessage(), request);
@@ -155,6 +180,35 @@ public class GlobalExceptionHandler {
                     request);
         }
         return build(HttpStatus.CONFLICT, "Conflit : une contrainte de données a été violée (valeur en doublon ?)", request);
+    }
+
+    // 400 Bad Request : levée automatiquement quand un @RequestBody annoté @Valid ne respecte pas une
+    // ou plusieurs contraintes Bean Validation (@NotBlank, @Pattern, @PositiveOrZero...) posées sur le
+    // DTO — voir par exemple UpdateUtilisateurRequestDTO ou CreatePaiementRequestDTO. Sans ce handler,
+    // cette exception tomberait dans handleGeneric() ci-dessous et renverrait un 500 trompeur : la
+    // requête du client est pourtant parfaitement identifiable comme invalide, pas une panne serveur.
+    // On agrège tous les champs en faute dans un seul message lisible plutôt qu'une structure séparée
+    // (ex: Map<String,String>) : ça reste compatible avec ErrorResponse et le toast déjà utilisé
+    // partout côté frontend (error-interceptor.ts lit simplement body.message), sans rien y changer.
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ErrorResponse> handleValidationException(MethodArgumentNotValidException ex, WebRequest request) {
+        String message = ex.getBindingResult().getFieldErrors().stream()
+                // Ordre stable (par nom de champ) : évite que le message change d'une requête à l'autre
+                // pour les mêmes erreurs, selon l'ordre interne (non garanti) dans lequel Hibernate
+                // Validator les a trouvées.
+                .sorted(Comparator.comparing(FieldError::getField))
+                .map(fieldError -> fieldError.getField() + " : " + fieldError.getDefaultMessage())
+                .collect(Collectors.joining(" ; "));
+        return build(HttpStatus.BAD_REQUEST, message, request);
+    }
+
+    // 400 Bad Request : un @RequestParam ou @PathVariable ne peut pas être converti vers le type attendu
+    // (ex: GET .../dashboard?dateDebut=pas-une-date, où dateDebut est un LocalDate). Même raisonnement
+    // que ci-dessus : c'est une erreur de requête client, jamais une panne serveur à masquer en 500.
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<ErrorResponse> handleTypeMismatch(MethodArgumentTypeMismatchException ex, WebRequest request) {
+        String message = "Le paramètre '" + ex.getName() + "' a une valeur invalide : " + ex.getValue();
+        return build(HttpStatus.BAD_REQUEST, message, request);
     }
 
     // Filet de sécurité final : capture TOUTE exception non prévue par les handlers ci-dessus,

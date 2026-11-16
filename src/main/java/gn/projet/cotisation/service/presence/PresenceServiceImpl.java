@@ -6,7 +6,6 @@ import gn.projet.cotisation.dto.presences.PresenceResponseDTO;
 import gn.projet.cotisation.entity.Presence;
 import gn.projet.cotisation.entity.Reunion;
 import gn.projet.cotisation.entity.Utilisateur;
-import gn.projet.cotisation.entity.Village;
 import gn.projet.cotisation.exception.presence.PresenceNotFoundException;
 import gn.projet.cotisation.exception.reunion.ReunionNotFoundException;
 import gn.projet.cotisation.exception.utilisateur.UtilisateurNotFoundException;

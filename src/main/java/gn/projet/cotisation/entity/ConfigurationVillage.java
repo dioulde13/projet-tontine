@@ -22,7 +22,7 @@ import java.math.BigDecimal; // type précis pour manipuler des montants d'argen
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ConfigurationVillage {
+public class ConfigurationVillage extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,15 +1,15 @@
-2026-10-20T15:12:42.623Z  INFO 46730 --- [cotisation] [Test worker] g.p.c.CotisationApplicationTests         : Starting CotisationApplicationTests using Java 21.0.12.1 with PID 46730 (started by mac in /Users/mac/Documents/projet exercices/gestion-cotisations/cotisation)
-2026-10-20T15:12:42.626Z DEBUG 46730 --- [cotisation] [Test worker] g.p.c.CotisationApplicationTests         : Running with Spring Boot v4.1.1, Spring v7.0.9
-2026-10-20T15:12:42.626Z  INFO 46730 --- [cotisation] [Test worker] g.p.c.CotisationApplicationTests         : No active profile set, falling back to 1 default profile: "default"
-2026-10-20T15:12:43.074Z  INFO 46730 --- [cotisation] [Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-10-20T15:12:43.114Z  INFO 46730 --- [cotisation] [Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 36 ms. Found 9 JPA repository interfaces.
-2026-10-20T15:12:43.371Z  INFO 46730 --- [cotisation] [Test worker] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
-2026-10-20T15:12:43.407Z  INFO 46730 --- [cotisation] [Test worker] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.5.Final
-2026-10-20T15:12:43.615Z  INFO 46730 --- [cotisation] [Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-10-20T15:12:43.633Z  INFO 46730 --- [cotisation] [Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-10-20T15:12:44.032Z  INFO 46730 --- [cotisation] [Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@68cb8e52
-2026-10-20T15:12:44.034Z  INFO 46730 --- [cotisation] [Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-10-20T15:12:44.128Z  INFO 46730 --- [cotisation] [Test worker] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+2026-10-22T16:32:22.132Z  INFO 58801 --- [cotisation] [Test worker] g.p.c.CotisationApplicationTests         : Starting CotisationApplicationTests using Java 21.0.12.1 with PID 58801 (started by mac in /Users/mac/Documents/projet exercices/gestion-cotisations/cotisation)
+2026-10-22T16:32:22.136Z DEBUG 58801 --- [cotisation] [Test worker] g.p.c.CotisationApplicationTests         : Running with Spring Boot v4.1.1, Spring v7.0.9
+2026-10-22T16:32:22.136Z  INFO 58801 --- [cotisation] [Test worker] g.p.c.CotisationApplicationTests         : No active profile set, falling back to 1 default profile: "default"
+2026-10-22T16:32:23.219Z  INFO 58801 --- [cotisation] [Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-22T16:32:23.267Z  INFO 58801 --- [cotisation] [Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 39 ms. Found 9 JPA repository interfaces.
+2026-10-22T16:32:23.576Z  INFO 58801 --- [cotisation] [Test worker] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-10-22T16:32:23.615Z  INFO 58801 --- [cotisation] [Test worker] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.5.Final
+2026-10-22T16:32:23.832Z  INFO 58801 --- [cotisation] [Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-22T16:32:23.851Z  INFO 58801 --- [cotisation] [Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-10-22T16:32:24.062Z  INFO 58801 --- [cotisation] [Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2e96489b
+2026-10-22T16:32:24.062Z  INFO 58801 --- [cotisation] [Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-10-22T16:32:24.126Z  INFO 58801 --- [cotisation] [Test worker] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
 	Database JDBC URL [jdbc:mysql://localhost:3306/cotisation]
 	Database driver: MySQL Connector/J
 	Database dialect: MySQLDialect
@@ -21,30 +21,30 @@
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2026-10-20T15:12:44.895Z  INFO 46730 --- [cotisation] [Test worker] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-10-20T15:12:45.255Z  INFO 46730 --- [cotisation] [Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-10-20T15:12:45.311Z  INFO 46730 --- [cotisation] [Test worker] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-10-20T15:12:46.005Z  INFO 46730 --- [cotisation] [Test worker] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
-2026-10-20T15:12:46.006Z  WARN 46730 --- [cotisation] [Test worker] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
-2026-10-20T15:12:46.085Z  WARN 46730 --- [cotisation] [Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-10-20T15:12:46.564Z  INFO 46730 --- [cotisation] [Test worker] g.p.c.CotisationApplicationTests         : Started CotisationApplicationTests in 4.076 seconds (process running for 4.736)
-2026-10-20T15:12:46.566Z  WARN 46730 --- [cotisation] [Test worker] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
-2026-10-20T15:12:46.566Z  WARN 46730 --- [cotisation] [Test worker] o.s.core.events.SpringDocAppInitializer  : SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
-2026-10-20T15:12:47.408Z  INFO 46730 --- [cotisation] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-10-20T15:12:47.410Z  INFO 46730 --- [cotisation] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2026-10-20T15:12:47.415Z  INFO 46730 --- [cotisation] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2026-10-20T16:38:43.178Z  INFO 63696 --- [cotisation] [Test worker] g.p.c.CotisationApplicationTests         : Starting CotisationApplicationTests using Java 21.0.12.1 with PID 63696 (started by mac in /Users/mac/Documents/projet exercices/gestion-cotisations/cotisation)
-2026-10-20T16:38:43.178Z DEBUG 63696 --- [cotisation] [Test worker] g.p.c.CotisationApplicationTests         : Running with Spring Boot v4.1.1, Spring v7.0.9
-2026-10-20T16:38:43.179Z  INFO 63696 --- [cotisation] [Test worker] g.p.c.CotisationApplicationTests         : No active profile set, falling back to 1 default profile: "default"
-2026-10-20T16:38:43.628Z  INFO 63696 --- [cotisation] [Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-10-20T16:38:43.671Z  INFO 63696 --- [cotisation] [Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 39 ms. Found 9 JPA repository interfaces.
-2026-10-20T16:38:43.919Z  INFO 63696 --- [cotisation] [Test worker] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
-2026-10-20T16:38:43.951Z  INFO 63696 --- [cotisation] [Test worker] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.5.Final
-2026-10-20T16:38:44.180Z  INFO 63696 --- [cotisation] [Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-10-20T16:38:44.197Z  INFO 63696 --- [cotisation] [Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-10-20T16:38:44.510Z  INFO 63696 --- [cotisation] [Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6a7ab205
-2026-10-20T16:38:44.514Z  INFO 63696 --- [cotisation] [Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-10-20T16:38:44.596Z  INFO 63696 --- [cotisation] [Test worker] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+2026-10-22T16:32:24.734Z  INFO 58801 --- [cotisation] [Test worker] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-10-22T16:32:25.919Z  INFO 58801 --- [cotisation] [Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-22T16:32:25.966Z  INFO 58801 --- [cotisation] [Test worker] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-10-22T16:32:26.666Z  INFO 58801 --- [cotisation] [Test worker] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-10-22T16:32:26.667Z  WARN 58801 --- [cotisation] [Test worker] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-10-22T16:32:26.743Z  WARN 58801 --- [cotisation] [Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-10-22T16:32:27.121Z  INFO 58801 --- [cotisation] [Test worker] g.p.c.CotisationApplicationTests         : Started CotisationApplicationTests in 5.125 seconds (process running for 5.821)
+2026-10-22T16:32:27.123Z  WARN 58801 --- [cotisation] [Test worker] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-10-22T16:32:27.123Z  WARN 58801 --- [cotisation] [Test worker] o.s.core.events.SpringDocAppInitializer  : SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-10-22T16:32:28.120Z  INFO 58801 --- [cotisation] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-10-22T16:32:28.125Z  INFO 58801 --- [cotisation] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-10-22T16:32:28.135Z  INFO 58801 --- [cotisation] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-10-22T16:33:30.030Z  INFO 59225 --- [cotisation] [Test worker] g.p.c.entity.BaseEntityAuditingTest      : Starting BaseEntityAuditingTest using Java 21.0.12.1 with PID 59225 (started by mac in /Users/mac/Documents/projet exercices/gestion-cotisations/cotisation)
+2026-10-22T16:33:30.032Z DEBUG 59225 --- [cotisation] [Test worker] g.p.c.entity.BaseEntityAuditingTest      : Running with Spring Boot v4.1.1, Spring v7.0.9
+2026-10-22T16:33:30.033Z  INFO 59225 --- [cotisation] [Test worker] g.p.c.entity.BaseEntityAuditingTest      : No active profile set, falling back to 1 default profile: "default"
+2026-10-22T16:33:31.047Z  INFO 59225 --- [cotisation] [Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-22T16:33:31.285Z  INFO 59225 --- [cotisation] [Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 230 ms. Found 9 JPA repository interfaces.
+2026-10-22T16:33:31.965Z  INFO 59225 --- [cotisation] [Test worker] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-10-22T16:33:32.031Z  INFO 59225 --- [cotisation] [Test worker] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.5.Final
+2026-10-22T16:33:32.306Z  INFO 59225 --- [cotisation] [Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-22T16:33:32.325Z  INFO 59225 --- [cotisation] [Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-10-22T16:33:32.555Z  INFO 59225 --- [cotisation] [Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6e069ca9
+2026-10-22T16:33:32.556Z  INFO 59225 --- [cotisation] [Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-10-22T16:33:32.608Z  INFO 59225 --- [cotisation] [Test worker] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
 	Database JDBC URL [jdbc:mysql://localhost:3306/cotisation]
 	Database driver: MySQL Connector/J
 	Database dialect: MySQLDialect
@@ -56,15 +56,290 @@
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2026-10-20T16:38:45.209Z  INFO 63696 --- [cotisation] [Test worker] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-10-20T16:38:45.373Z  INFO 63696 --- [cotisation] [Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-10-20T16:38:45.421Z  INFO 63696 --- [cotisation] [Test worker] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-10-20T16:38:46.171Z  INFO 63696 --- [cotisation] [Test worker] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
-2026-10-20T16:38:46.171Z  WARN 63696 --- [cotisation] [Test worker] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
-2026-10-20T16:38:46.251Z  WARN 63696 --- [cotisation] [Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-10-20T16:38:46.675Z  INFO 63696 --- [cotisation] [Test worker] g.p.c.CotisationApplicationTests         : Started CotisationApplicationTests in 3.642 seconds (process running for 4.397)
-2026-10-20T16:38:46.676Z  WARN 63696 --- [cotisation] [Test worker] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
-2026-10-20T16:38:46.677Z  WARN 63696 --- [cotisation] [Test worker] o.s.core.events.SpringDocAppInitializer  : SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
-2026-10-20T16:38:47.495Z  INFO 63696 --- [cotisation] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-10-20T16:38:47.496Z  INFO 63696 --- [cotisation] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2026-10-20T16:38:47.501Z  INFO 63696 --- [cotisation] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-10-22T16:33:33.439Z  INFO 59225 --- [cotisation] [Test worker] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-10-22T16:33:33.530Z  INFO 59225 --- [cotisation] [Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-22T16:33:33.578Z  INFO 59225 --- [cotisation] [Test worker] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-10-22T16:33:34.339Z  INFO 59225 --- [cotisation] [Test worker] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-10-22T16:33:34.339Z  WARN 59225 --- [cotisation] [Test worker] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-10-22T16:33:34.448Z  WARN 59225 --- [cotisation] [Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-10-22T16:33:35.638Z  INFO 59225 --- [cotisation] [Test worker] g.p.c.entity.BaseEntityAuditingTest      : Started BaseEntityAuditingTest in 6.295 seconds (process running for 8.29)
+2026-10-22T16:33:35.641Z  WARN 59225 --- [cotisation] [Test worker] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-10-22T16:33:35.641Z  WARN 59225 --- [cotisation] [Test worker] o.s.core.events.SpringDocAppInitializer  : SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-10-22T16:33:36.711Z  INFO 59225 --- [cotisation] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-10-22T16:33:36.714Z  INFO 59225 --- [cotisation] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-10-22T16:33:36.720Z  INFO 59225 --- [cotisation] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-10-22T16:33:45.951Z  INFO 59342 --- [cotisation] [Test worker] g.p.c.CotisationApplicationTests         : Starting CotisationApplicationTests using Java 21.0.12.1 with PID 59342 (started by mac in /Users/mac/Documents/projet exercices/gestion-cotisations/cotisation)
+2026-10-22T16:33:45.952Z DEBUG 59342 --- [cotisation] [Test worker] g.p.c.CotisationApplicationTests         : Running with Spring Boot v4.1.1, Spring v7.0.9
+2026-10-22T16:33:45.953Z  INFO 59342 --- [cotisation] [Test worker] g.p.c.CotisationApplicationTests         : No active profile set, falling back to 1 default profile: "default"
+2026-10-22T16:33:46.373Z  INFO 59342 --- [cotisation] [Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-22T16:33:46.414Z  INFO 59342 --- [cotisation] [Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 36 ms. Found 9 JPA repository interfaces.
+2026-10-22T16:33:46.712Z  INFO 59342 --- [cotisation] [Test worker] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-10-22T16:33:46.743Z  INFO 59342 --- [cotisation] [Test worker] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.5.Final
+2026-10-22T16:33:46.969Z  INFO 59342 --- [cotisation] [Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-22T16:33:46.984Z  INFO 59342 --- [cotisation] [Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-10-22T16:33:47.198Z  INFO 59342 --- [cotisation] [Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@20a46227
+2026-10-22T16:33:47.199Z  INFO 59342 --- [cotisation] [Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-10-22T16:33:47.257Z  INFO 59342 --- [cotisation] [Test worker] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/cotisation]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 26.7
+	Default catalog/schema: cotisation/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-10-22T16:33:47.892Z  INFO 59342 --- [cotisation] [Test worker] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-10-22T16:33:48.014Z  INFO 59342 --- [cotisation] [Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-22T16:33:48.056Z  INFO 59342 --- [cotisation] [Test worker] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-10-22T16:33:48.652Z  INFO 59342 --- [cotisation] [Test worker] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-10-22T16:33:48.653Z  WARN 59342 --- [cotisation] [Test worker] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-10-22T16:33:48.754Z  WARN 59342 --- [cotisation] [Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-10-22T16:33:49.211Z  INFO 59342 --- [cotisation] [Test worker] g.p.c.CotisationApplicationTests         : Started CotisationApplicationTests in 3.389 seconds (process running for 4.135)
+2026-10-22T16:33:49.212Z  WARN 59342 --- [cotisation] [Test worker] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-10-22T16:33:49.213Z  WARN 59342 --- [cotisation] [Test worker] o.s.core.events.SpringDocAppInitializer  : SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-10-22T16:33:49.505Z  INFO 59342 --- [cotisation] [Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [gn.projet.cotisation.entity.BaseEntityAuditingTest]: BaseEntityAuditingTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-22T16:33:49.512Z  INFO 59342 --- [cotisation] [Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration gn.projet.cotisation.CotisationApplication for test class gn.projet.cotisation.entity.BaseEntityAuditingTest
+2026-10-22T16:33:49.512Z  INFO 59342 --- [cotisation] [Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [gn.projet.cotisation.entity.BaseEntityAuditingTest]: BaseEntityAuditingTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-22T16:33:49.513Z  INFO 59342 --- [cotisation] [Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration gn.projet.cotisation.CotisationApplication for test class gn.projet.cotisation.entity.BaseEntityAuditingTest
+2026-10-22T16:33:50.130Z  INFO 59342 --- [cotisation] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-10-22T16:33:50.131Z  INFO 59342 --- [cotisation] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-10-22T16:33:50.137Z  INFO 59342 --- [cotisation] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-10-22T16:38:02.974Z  INFO 60256 --- [cotisation] [Test worker] g.p.c.CotisationApplicationTests         : Starting CotisationApplicationTests using Java 21.0.12.1 with PID 60256 (started by mac in /Users/mac/Documents/projet exercices/gestion-cotisations/cotisation)
+2026-10-22T16:38:02.974Z DEBUG 60256 --- [cotisation] [Test worker] g.p.c.CotisationApplicationTests         : Running with Spring Boot v4.1.1, Spring v7.0.9
+2026-10-22T16:38:02.975Z  INFO 60256 --- [cotisation] [Test worker] g.p.c.CotisationApplicationTests         : No active profile set, falling back to 1 default profile: "default"
+2026-10-22T16:38:03.725Z  INFO 60256 --- [cotisation] [Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-22T16:38:03.771Z  INFO 60256 --- [cotisation] [Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 40 ms. Found 9 JPA repository interfaces.
+2026-10-22T16:38:04.169Z  INFO 60256 --- [cotisation] [Test worker] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-10-22T16:38:04.233Z  INFO 60256 --- [cotisation] [Test worker] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.5.Final
+2026-10-22T16:38:04.486Z  INFO 60256 --- [cotisation] [Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-22T16:38:04.510Z  INFO 60256 --- [cotisation] [Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-10-22T16:38:04.731Z  INFO 60256 --- [cotisation] [Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5ead245
+2026-10-22T16:38:04.732Z  INFO 60256 --- [cotisation] [Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-10-22T16:38:04.783Z  INFO 60256 --- [cotisation] [Test worker] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/cotisation]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 26.7
+	Default catalog/schema: cotisation/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-10-22T16:38:05.401Z  INFO 60256 --- [cotisation] [Test worker] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-10-22T16:38:05.483Z  INFO 60256 --- [cotisation] [Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-22T16:38:05.529Z  INFO 60256 --- [cotisation] [Test worker] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-10-22T16:38:06.184Z  INFO 60256 --- [cotisation] [Test worker] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-10-22T16:38:06.184Z  WARN 60256 --- [cotisation] [Test worker] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-10-22T16:38:06.273Z  WARN 60256 --- [cotisation] [Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-10-22T16:38:06.707Z  INFO 60256 --- [cotisation] [Test worker] g.p.c.CotisationApplicationTests         : Started CotisationApplicationTests in 3.86 seconds (process running for 4.521)
+2026-10-22T16:38:06.709Z  WARN 60256 --- [cotisation] [Test worker] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-10-22T16:38:06.709Z  WARN 60256 --- [cotisation] [Test worker] o.s.core.events.SpringDocAppInitializer  : SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-10-22T16:38:06.999Z  INFO 60256 --- [cotisation] [Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [gn.projet.cotisation.entity.BaseEntityAuditingTest]: BaseEntityAuditingTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-22T16:38:07.005Z  INFO 60256 --- [cotisation] [Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration gn.projet.cotisation.CotisationApplication for test class gn.projet.cotisation.entity.BaseEntityAuditingTest
+2026-10-22T16:38:07.006Z  INFO 60256 --- [cotisation] [Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [gn.projet.cotisation.entity.BaseEntityAuditingTest]: BaseEntityAuditingTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-22T16:38:07.007Z  INFO 60256 --- [cotisation] [Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration gn.projet.cotisation.CotisationApplication for test class gn.projet.cotisation.entity.BaseEntityAuditingTest
+2026-10-22T16:38:07.646Z  INFO 60256 --- [cotisation] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-10-22T16:38:07.647Z  INFO 60256 --- [cotisation] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-10-22T16:38:07.653Z  INFO 60256 --- [cotisation] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-10-22T16:47:01.570Z  INFO 62287 --- [cotisation] [Test worker] g.p.c.CotisationApplicationTests         : Starting CotisationApplicationTests using Java 21.0.12.1 with PID 62287 (started by mac in /Users/mac/Documents/projet exercices/gestion-cotisations/cotisation)
+2026-10-22T16:47:01.570Z DEBUG 62287 --- [cotisation] [Test worker] g.p.c.CotisationApplicationTests         : Running with Spring Boot v4.1.1, Spring v7.0.9
+2026-10-22T16:47:01.571Z  INFO 62287 --- [cotisation] [Test worker] g.p.c.CotisationApplicationTests         : No active profile set, falling back to 1 default profile: "default"
+2026-10-22T16:47:02.035Z  INFO 62287 --- [cotisation] [Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-22T16:47:02.077Z  INFO 62287 --- [cotisation] [Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 38 ms. Found 9 JPA repository interfaces.
+2026-10-22T16:47:02.377Z  INFO 62287 --- [cotisation] [Test worker] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-10-22T16:47:02.412Z  INFO 62287 --- [cotisation] [Test worker] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.5.Final
+2026-10-22T16:47:02.628Z  INFO 62287 --- [cotisation] [Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-22T16:47:02.645Z  INFO 62287 --- [cotisation] [Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-10-22T16:47:02.884Z  INFO 62287 --- [cotisation] [Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@20a46227
+2026-10-22T16:47:02.885Z  INFO 62287 --- [cotisation] [Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-10-22T16:47:02.940Z  INFO 62287 --- [cotisation] [Test worker] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/cotisation]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 26.7
+	Default catalog/schema: cotisation/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-10-22T16:47:03.540Z  INFO 62287 --- [cotisation] [Test worker] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-10-22T16:47:03.634Z  INFO 62287 --- [cotisation] [Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-22T16:47:03.676Z  INFO 62287 --- [cotisation] [Test worker] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-10-22T16:47:04.348Z  INFO 62287 --- [cotisation] [Test worker] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-10-22T16:47:04.348Z  WARN 62287 --- [cotisation] [Test worker] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-10-22T16:47:04.436Z  WARN 62287 --- [cotisation] [Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-10-22T16:47:04.836Z  INFO 62287 --- [cotisation] [Test worker] g.p.c.CotisationApplicationTests         : Started CotisationApplicationTests in 3.441 seconds (process running for 4.177)
+2026-10-22T16:47:04.838Z  WARN 62287 --- [cotisation] [Test worker] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-10-22T16:47:04.838Z  WARN 62287 --- [cotisation] [Test worker] o.s.core.events.SpringDocAppInitializer  : SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-10-22T16:47:05.215Z  INFO 62287 --- [cotisation] [Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [gn.projet.cotisation.entity.BaseEntityAuditingTest]: BaseEntityAuditingTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-22T16:47:05.222Z  INFO 62287 --- [cotisation] [Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration gn.projet.cotisation.CotisationApplication for test class gn.projet.cotisation.entity.BaseEntityAuditingTest
+2026-10-22T16:47:05.222Z  INFO 62287 --- [cotisation] [Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [gn.projet.cotisation.entity.BaseEntityAuditingTest]: BaseEntityAuditingTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-22T16:47:05.223Z  INFO 62287 --- [cotisation] [Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration gn.projet.cotisation.CotisationApplication for test class gn.projet.cotisation.entity.BaseEntityAuditingTest
+2026-10-22T16:47:05.981Z  INFO 62287 --- [cotisation] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-10-22T16:47:05.987Z  INFO 62287 --- [cotisation] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-10-22T16:47:05.993Z  INFO 62287 --- [cotisation] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-10-22T16:54:01.399Z  INFO 63735 --- [cotisation] [Test worker] g.p.c.CotisationApplicationTests         : Starting CotisationApplicationTests using Java 21.0.12.1 with PID 63735 (started by mac in /Users/mac/Documents/projet exercices/gestion-cotisations/cotisation)
+2026-10-22T16:54:01.400Z DEBUG 63735 --- [cotisation] [Test worker] g.p.c.CotisationApplicationTests         : Running with Spring Boot v4.1.1, Spring v7.0.9
+2026-10-22T16:54:01.401Z  INFO 63735 --- [cotisation] [Test worker] g.p.c.CotisationApplicationTests         : No active profile set, falling back to 1 default profile: "default"
+2026-10-22T16:54:01.836Z  INFO 63735 --- [cotisation] [Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-22T16:54:01.877Z  INFO 63735 --- [cotisation] [Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 36 ms. Found 9 JPA repository interfaces.
+2026-10-22T16:54:02.160Z  INFO 63735 --- [cotisation] [Test worker] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-10-22T16:54:02.194Z  INFO 63735 --- [cotisation] [Test worker] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.5.Final
+2026-10-22T16:54:02.402Z  INFO 63735 --- [cotisation] [Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-22T16:54:02.425Z  INFO 63735 --- [cotisation] [Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-10-22T16:54:02.667Z  INFO 63735 --- [cotisation] [Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2e96489b
+2026-10-22T16:54:02.668Z  INFO 63735 --- [cotisation] [Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-10-22T16:54:02.723Z  INFO 63735 --- [cotisation] [Test worker] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/cotisation]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 26.7
+	Default catalog/schema: cotisation/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-10-22T16:54:03.327Z  INFO 63735 --- [cotisation] [Test worker] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-10-22T16:54:03.417Z  INFO 63735 --- [cotisation] [Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-22T16:54:03.461Z  INFO 63735 --- [cotisation] [Test worker] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-10-22T16:54:04.115Z  INFO 63735 --- [cotisation] [Test worker] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-10-22T16:54:04.116Z  WARN 63735 --- [cotisation] [Test worker] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-10-22T16:54:04.195Z  WARN 63735 --- [cotisation] [Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-10-22T16:54:04.637Z  INFO 63735 --- [cotisation] [Test worker] g.p.c.CotisationApplicationTests         : Started CotisationApplicationTests in 3.366 seconds (process running for 3.981)
+2026-10-22T16:54:04.639Z  WARN 63735 --- [cotisation] [Test worker] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-10-22T16:54:04.639Z  WARN 63735 --- [cotisation] [Test worker] o.s.core.events.SpringDocAppInitializer  : SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-10-22T16:54:04.913Z  INFO 63735 --- [cotisation] [Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [gn.projet.cotisation.entity.BaseEntityAuditingTest]: BaseEntityAuditingTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-22T16:54:04.919Z  INFO 63735 --- [cotisation] [Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration gn.projet.cotisation.CotisationApplication for test class gn.projet.cotisation.entity.BaseEntityAuditingTest
+2026-10-22T16:54:04.920Z  INFO 63735 --- [cotisation] [Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [gn.projet.cotisation.entity.BaseEntityAuditingTest]: BaseEntityAuditingTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-22T16:54:04.920Z  INFO 63735 --- [cotisation] [Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration gn.projet.cotisation.CotisationApplication for test class gn.projet.cotisation.entity.BaseEntityAuditingTest
+2026-10-22T16:54:05.538Z  INFO 63735 --- [cotisation] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-10-22T16:54:05.539Z  INFO 63735 --- [cotisation] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-10-22T16:54:05.545Z  INFO 63735 --- [cotisation] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-10-22T16:56:14.628Z  INFO 64253 --- [cotisation] [Test worker] g.p.c.c.ValidationIntegrationTest        : Starting ValidationIntegrationTest using Java 21.0.12.1 with PID 64253 (started by mac in /Users/mac/Documents/projet exercices/gestion-cotisations/cotisation)
+2026-10-22T16:56:14.629Z DEBUG 64253 --- [cotisation] [Test worker] g.p.c.c.ValidationIntegrationTest        : Running with Spring Boot v4.1.1, Spring v7.0.9
+2026-10-22T16:56:14.629Z  INFO 64253 --- [cotisation] [Test worker] g.p.c.c.ValidationIntegrationTest        : No active profile set, falling back to 1 default profile: "default"
+2026-10-22T16:56:15.089Z  INFO 64253 --- [cotisation] [Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-22T16:56:15.129Z  INFO 64253 --- [cotisation] [Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 36 ms. Found 9 JPA repository interfaces.
+2026-10-22T16:56:15.413Z  INFO 64253 --- [cotisation] [Test worker] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-10-22T16:56:15.450Z  INFO 64253 --- [cotisation] [Test worker] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.5.Final
+2026-10-22T16:56:15.649Z  INFO 64253 --- [cotisation] [Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-22T16:56:15.666Z  INFO 64253 --- [cotisation] [Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-10-22T16:56:15.875Z  INFO 64253 --- [cotisation] [Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@218e186b
+2026-10-22T16:56:15.876Z  INFO 64253 --- [cotisation] [Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-10-22T16:56:15.927Z  INFO 64253 --- [cotisation] [Test worker] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/cotisation]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 26.7
+	Default catalog/schema: cotisation/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-10-22T16:56:16.507Z  INFO 64253 --- [cotisation] [Test worker] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-10-22T16:56:16.593Z  INFO 64253 --- [cotisation] [Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-22T16:56:16.635Z  INFO 64253 --- [cotisation] [Test worker] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-10-22T16:56:17.260Z  INFO 64253 --- [cotisation] [Test worker] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-10-22T16:56:17.261Z  WARN 64253 --- [cotisation] [Test worker] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-10-22T16:56:17.342Z  WARN 64253 --- [cotisation] [Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-10-22T16:56:17.690Z DEBUG 64253 --- [cotisation] [Test worker] g.p.c.security.JwtAuthenticationFilter   : Filter 'jwtAuthenticationFilter' configured for use
+2026-10-22T16:56:17.691Z  INFO 64253 --- [cotisation] [Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-10-22T16:56:17.691Z  INFO 64253 --- [cotisation] [Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-10-22T16:56:17.693Z  INFO 64253 --- [cotisation] [Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 2 ms
+2026-10-22T16:56:17.740Z  INFO 64253 --- [cotisation] [Test worker] g.p.c.c.ValidationIntegrationTest        : Started ValidationIntegrationTest in 3.283 seconds (process running for 3.949)
+2026-10-22T16:56:17.741Z  WARN 64253 --- [cotisation] [Test worker] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-10-22T16:56:17.742Z  WARN 64253 --- [cotisation] [Test worker] o.s.core.events.SpringDocAppInitializer  : SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-10-22T16:56:18.371Z  INFO 64253 --- [cotisation] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-10-22T16:56:18.372Z  INFO 64253 --- [cotisation] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-10-22T16:56:18.376Z  INFO 64253 --- [cotisation] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-10-22T16:57:22.994Z  INFO 64513 --- [cotisation] [Test worker] g.p.c.CotisationApplicationTests         : Starting CotisationApplicationTests using Java 21.0.12.1 with PID 64513 (started by mac in /Users/mac/Documents/projet exercices/gestion-cotisations/cotisation)
+2026-10-22T16:57:22.995Z DEBUG 64513 --- [cotisation] [Test worker] g.p.c.CotisationApplicationTests         : Running with Spring Boot v4.1.1, Spring v7.0.9
+2026-10-22T16:57:22.996Z  INFO 64513 --- [cotisation] [Test worker] g.p.c.CotisationApplicationTests         : No active profile set, falling back to 1 default profile: "default"
+2026-10-22T16:57:23.473Z  INFO 64513 --- [cotisation] [Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-22T16:57:23.517Z  INFO 64513 --- [cotisation] [Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 38 ms. Found 9 JPA repository interfaces.
+2026-10-22T16:57:49.133Z  INFO 64513 --- [cotisation] [Test worker] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-10-22T16:57:49.168Z  INFO 64513 --- [cotisation] [Test worker] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.5.Final
+2026-10-22T16:57:49.386Z  INFO 64513 --- [cotisation] [Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-22T16:57:49.402Z  INFO 64513 --- [cotisation] [Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-10-22T16:57:49.603Z  INFO 64513 --- [cotisation] [Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3b3a3a92
+2026-10-22T16:57:49.605Z  INFO 64513 --- [cotisation] [Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-10-22T16:57:49.659Z  INFO 64513 --- [cotisation] [Test worker] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/cotisation]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 26.7
+	Default catalog/schema: cotisation/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-10-22T16:57:50.262Z  INFO 64513 --- [cotisation] [Test worker] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-10-22T16:57:50.342Z  INFO 64513 --- [cotisation] [Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-22T16:57:50.384Z  INFO 64513 --- [cotisation] [Test worker] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-10-22T16:57:51.005Z  INFO 64513 --- [cotisation] [Test worker] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-10-22T16:57:51.006Z  WARN 64513 --- [cotisation] [Test worker] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-10-22T16:57:51.087Z  WARN 64513 --- [cotisation] [Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-10-22T16:57:51.456Z  INFO 64513 --- [cotisation] [Test worker] g.p.c.CotisationApplicationTests         : Started CotisationApplicationTests in 28.605 seconds (process running for 4.326)
+2026-10-22T16:57:51.458Z  WARN 64513 --- [cotisation] [Test worker] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-10-22T16:57:51.458Z  WARN 64513 --- [cotisation] [Test worker] o.s.core.events.SpringDocAppInitializer  : SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-10-22T16:57:51.741Z  INFO 64513 --- [cotisation] [Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [gn.projet.cotisation.controller.ValidationIntegrationTest]: ValidationIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-22T16:57:51.749Z  INFO 64513 --- [cotisation] [Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration gn.projet.cotisation.CotisationApplication for test class gn.projet.cotisation.controller.ValidationIntegrationTest
+2026-10-22T16:57:51.750Z  INFO 64513 --- [cotisation] [Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [gn.projet.cotisation.controller.ValidationIntegrationTest]: ValidationIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-22T16:57:51.751Z  INFO 64513 --- [cotisation] [Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration gn.projet.cotisation.CotisationApplication for test class gn.projet.cotisation.controller.ValidationIntegrationTest
+2026-10-22T16:57:51.766Z  INFO 64513 --- [cotisation] [Test worker] g.p.c.c.ValidationIntegrationTest        : Starting ValidationIntegrationTest using Java 21.0.12.1 with PID 64513 (started by mac in /Users/mac/Documents/projet exercices/gestion-cotisations/cotisation)
+2026-10-22T16:57:51.766Z DEBUG 64513 --- [cotisation] [Test worker] g.p.c.c.ValidationIntegrationTest        : Running with Spring Boot v4.1.1, Spring v7.0.9
+2026-10-22T16:57:51.766Z  INFO 64513 --- [cotisation] [Test worker] g.p.c.c.ValidationIntegrationTest        : No active profile set, falling back to 1 default profile: "default"
+2026-10-22T16:57:51.855Z  INFO 64513 --- [cotisation] [Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-22T16:57:51.867Z  INFO 64513 --- [cotisation] [Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 11 ms. Found 9 JPA repository interfaces.
+2026-10-22T16:57:51.911Z  INFO 64513 --- [cotisation] [Test worker] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-10-22T16:57:51.921Z  INFO 64513 --- [cotisation] [Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-22T16:57:51.921Z  INFO 64513 --- [cotisation] [Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2026-10-22T16:57:51.940Z  INFO 64513 --- [cotisation] [Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3657201c
+2026-10-22T16:57:51.941Z  INFO 64513 --- [cotisation] [Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2026-10-22T16:57:51.942Z  INFO 64513 --- [cotisation] [Test worker] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/cotisation]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 26.7
+	Default catalog/schema: cotisation/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-10-22T16:57:52.006Z  INFO 64513 --- [cotisation] [Test worker] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-10-22T16:57:52.040Z  INFO 64513 --- [cotisation] [Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-22T16:57:52.093Z  INFO 64513 --- [cotisation] [Test worker] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-10-22T16:57:52.094Z  WARN 64513 --- [cotisation] [Test worker] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-10-22T16:57:52.113Z  WARN 64513 --- [cotisation] [Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-10-22T16:57:52.194Z DEBUG 64513 --- [cotisation] [Test worker] g.p.c.security.JwtAuthenticationFilter   : Filter 'jwtAuthenticationFilter' configured for use
+2026-10-22T16:57:52.195Z  INFO 64513 --- [cotisation] [Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-10-22T16:57:52.195Z  INFO 64513 --- [cotisation] [Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-10-22T16:57:52.196Z  INFO 64513 --- [cotisation] [Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2026-10-22T16:57:52.209Z  INFO 64513 --- [cotisation] [Test worker] g.p.c.c.ValidationIntegrationTest        : Started ValidationIntegrationTest in 0.455 seconds (process running for 5.079)
+2026-10-22T16:57:52.209Z  WARN 64513 --- [cotisation] [Test worker] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-10-22T16:57:52.209Z  WARN 64513 --- [cotisation] [Test worker] o.s.core.events.SpringDocAppInitializer  : SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-10-22T16:57:52.545Z  INFO 64513 --- [cotisation] [Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [gn.projet.cotisation.entity.BaseEntityAuditingTest]: BaseEntityAuditingTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-22T16:57:52.550Z  INFO 64513 --- [cotisation] [Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration gn.projet.cotisation.CotisationApplication for test class gn.projet.cotisation.entity.BaseEntityAuditingTest
+2026-10-22T16:57:52.550Z  INFO 64513 --- [cotisation] [Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [gn.projet.cotisation.entity.BaseEntityAuditingTest]: BaseEntityAuditingTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-22T16:57:52.551Z  INFO 64513 --- [cotisation] [Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration gn.projet.cotisation.CotisationApplication for test class gn.projet.cotisation.entity.BaseEntityAuditingTest
+2026-10-22T16:57:53.220Z  INFO 64513 --- [cotisation] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-10-22T16:57:53.222Z  INFO 64513 --- [cotisation] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-10-22T16:57:53.227Z  INFO 64513 --- [cotisation] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-10-22T16:57:53.231Z  INFO 64513 --- [cotisation] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-10-22T16:57:53.232Z  INFO 64513 --- [cotisation] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2026-10-22T16:57:53.234Z  INFO 64513 --- [cotisation] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.

@@ -4,6 +4,7 @@ import gn.projet.cotisation.dto.paiements.CreatePaiementRequestDTO;
 import gn.projet.cotisation.dto.paiements.PaiementResponseDTO;
 import gn.projet.cotisation.security.CustomUserDetails;
 import gn.projet.cotisation.service.paiement.PaiementServices;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,7 @@ public class VillagePaiementController {
     @PostMapping
     public List<PaiementResponseDTO> create(
             @PathVariable Long villageId,
-            @RequestBody CreatePaiementRequestDTO dto,
+            @Valid @RequestBody CreatePaiementRequestDTO dto,
             @AuthenticationPrincipal CustomUserDetails userDetails
     ) {
         return paiementServices.create(villageId, dto, userDetails.getUtilisateur());

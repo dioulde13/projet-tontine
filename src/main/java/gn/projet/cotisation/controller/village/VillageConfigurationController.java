@@ -4,6 +4,7 @@ import gn.projet.cotisation.dto.configurationvillages.ConfigurationVillageRespon
 import gn.projet.cotisation.dto.configurationvillages.UpdateConfigurationVillageRequestDTO;
 import gn.projet.cotisation.security.CustomUserDetails;
 import gn.projet.cotisation.service.configurationvillage.ConfigurationVillageService;
+import jakarta.validation.Valid;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +21,7 @@ public class VillageConfigurationController {
     @PostMapping
     public ConfigurationVillageResponseDTO create(
             @PathVariable Long villageId,
-            @RequestBody UpdateConfigurationVillageRequestDTO dto,
+            @Valid @RequestBody UpdateConfigurationVillageRequestDTO dto,
             @AuthenticationPrincipal CustomUserDetails userDetails
     ) {
         return configurationVillageService.create(villageId, dto,
@@ -38,7 +39,7 @@ public class VillageConfigurationController {
     @PutMapping
     public ConfigurationVillageResponseDTO update(
             @PathVariable Long villageId,
-            @RequestBody UpdateConfigurationVillageRequestDTO dto,
+            @Valid @RequestBody UpdateConfigurationVillageRequestDTO dto,
             @AuthenticationPrincipal CustomUserDetails userDetails
     ) {
         return configurationVillageService.update(villageId, dto,

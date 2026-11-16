@@ -5,6 +5,7 @@ import gn.projet.cotisation.dto.presences.PresenceResponseDTO;
 import gn.projet.cotisation.entity.Utilisateur;
 import gn.projet.cotisation.security.CustomUserDetails;
 import gn.projet.cotisation.service.presence.PresenceService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +30,7 @@ public class VillageReunionPresenceController {
     public PresenceResponseDTO create(
             @PathVariable Long villageId,
             @PathVariable Long reunionId,
-            @RequestBody CreatePresenceRequestDTO dto,
+            @Valid @RequestBody CreatePresenceRequestDTO dto,
             @AuthenticationPrincipal CustomUserDetails userDetails
             ){
         return presenceService.create(villageId, reunionId, dto, userDetails.getUtilisateur());

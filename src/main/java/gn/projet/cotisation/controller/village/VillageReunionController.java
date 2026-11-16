@@ -4,6 +4,7 @@ import gn.projet.cotisation.dto.reunions.CreateReunionRequestDTO;
 import gn.projet.cotisation.dto.reunions.ReunionResponseDTO;
 import gn.projet.cotisation.security.CustomUserDetails;
 import gn.projet.cotisation.service.reunion.ReunionService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +27,7 @@ public class VillageReunionController {
     @PostMapping
     public ReunionResponseDTO create(
             @PathVariable Long villageId,
-            @RequestBody CreateReunionRequestDTO dto,
+            @Valid @RequestBody CreateReunionRequestDTO dto,
             @AuthenticationPrincipal CustomUserDetails userDetails
             ){
         return  reunionService.create(villageId,dto,userDetails.getUtilisateur());

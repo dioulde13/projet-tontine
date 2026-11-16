@@ -7,6 +7,7 @@ import gn.projet.cotisation.entity.Utilisateur;
 import gn.projet.cotisation.entity.Village;
 import gn.projet.cotisation.exception.configurationvillage.ConfigurationVillageNotFoundException;
 import gn.projet.cotisation.repository.configurationVillage.ConfigurationVillageRepository;
+import gn.projet.cotisation.repository.utilisateur.UtilisateurRepository;
 import gn.projet.cotisation.service.village.VillageAccessService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,6 +30,8 @@ class ConfigurationVillageServiceImplTest {
 
     @Mock
     private ConfigurationVillageRepository configurationVillageRepository;
+    @Mock
+    private UtilisateurRepository utilisateurRepository;
     @Mock
     private VillageAccessService villageAccessService;
 
@@ -69,6 +72,69 @@ class ConfigurationVillageServiceImplTest {
         ArgumentCaptor<ConfigurationVillage> captor = ArgumentCaptor.forClass(ConfigurationVillage.class);
         verify(configurationVillageRepository).save(captor.capture());
         assertThat(captor.getValue().getMontantCotisationMensuelle()).isEqualByComparingTo("15000");
+    }
+
+    @Test
+    void update_resoutLeNomCompletDuDernierModificateurQuandConnu() {
+        Village village = new Village(1L, "Kindia");
+        Utilisateur president = new Utilisateur();
+        president.setId(1L);
+
+        ConfigurationVillage configExistante = new ConfigurationVillage();
+        configExistante.setId(10L);
+        configExistante.setVillage(village);
+        configExistante.setMontantCotisationMensuelle(new BigDecimal("10000"));
+        configExistante.setMontantPenaliteRetard(new BigDecimal("1000"));
+        configExistante.setMontantPenaliteAbsenceReunion(new BigDecimal("500"));
+        // Simule ce que BaseEntity/SpringSecurityAuditorAware aurait déjà rempli au moment du save().
+        configExistante.setUpdatedBy("620000002");
+
+        Utilisateur auteur = new Utilisateur();
+        auteur.setNom("Diallo");
+        auteur.setPrenom("Fatoumata");
+
+        when(villageAccessService.verifierEtRecupererVillageGere(1L, president)).thenReturn(village);
+        when(configurationVillageRepository.findByVillageId(1L)).thenReturn(Optional.of(configExistante));
+        when(configurationVillageRepository.save(configExistante)).thenReturn(configExistante);
+        when(utilisateurRepository.findByTelephone("620000002")).thenReturn(Optional.of(auteur));
+
+        UpdateConfigurationVillageRequestDTO dto = new UpdateConfigurationVillageRequestDTO(
+                new BigDecimal("15000"), new BigDecimal("2000"), new BigDecimal("800")
+        );
+
+        ConfigurationVillageResponseDTO result = configurationVillageService.update(1L, dto, president);
+
+        assertThat(result.modifiePar()).isEqualTo("620000002");
+        assertThat(result.modifieParNom()).isEqualTo("Fatoumata Diallo");
+    }
+
+    @Test
+    void update_renvoieUnNomNullQuandLeTelephoneNeCorrespondPlusAPersonne() {
+        Village village = new Village(1L, "Kindia");
+        Utilisateur president = new Utilisateur();
+        president.setId(1L);
+
+        ConfigurationVillage configExistante = new ConfigurationVillage();
+        configExistante.setId(10L);
+        configExistante.setVillage(village);
+        configExistante.setMontantCotisationMensuelle(new BigDecimal("10000"));
+        configExistante.setMontantPenaliteRetard(new BigDecimal("1000"));
+        configExistante.setMontantPenaliteAbsenceReunion(new BigDecimal("500"));
+        configExistante.setUpdatedBy("620000099"); // compte supprimé depuis, par exemple
+
+        when(villageAccessService.verifierEtRecupererVillageGere(1L, president)).thenReturn(village);
+        when(configurationVillageRepository.findByVillageId(1L)).thenReturn(Optional.of(configExistante));
+        when(configurationVillageRepository.save(configExistante)).thenReturn(configExistante);
+        when(utilisateurRepository.findByTelephone("620000099")).thenReturn(Optional.empty());
+
+        UpdateConfigurationVillageRequestDTO dto = new UpdateConfigurationVillageRequestDTO(
+                new BigDecimal("15000"), new BigDecimal("2000"), new BigDecimal("800")
+        );
+
+        ConfigurationVillageResponseDTO result = configurationVillageService.update(1L, dto, president);
+
+        assertThat(result.modifiePar()).isEqualTo("620000099"); // le téléphone brut reste, lui, connu
+        assertThat(result.modifieParNom()).isNull();             // mais pas de nom à lui associer
     }
 
     @Test
