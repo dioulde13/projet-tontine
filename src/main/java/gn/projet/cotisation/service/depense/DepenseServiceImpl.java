@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class DepenseServiceImpl implements DepenseService {
@@ -54,14 +55,16 @@ public class DepenseServiceImpl implements DepenseService {
         depense.setMontant(dto.montant());
         depense.setMotif(dto.motif());
         depense.setDate(dto.date());
+        depense.setDateEmissionRecu(LocalDate.now());
+        // numeroRecu est NOT NULL + UNIQUE mais dépend de l'id, inconnu avant le premier INSERT
+        // (GenerationType.IDENTITY). On pose un placeholder unique le temps de cet INSERT, puis on le
+        // remplace par le vrai numéro basé sur l'id généré, via un second save (UPDATE) dans la même
+        // transaction — pas besoin d'un compteur séparé ni d'une table Recu dédiée, une dépense
+        // correspondant toujours à exactement un reçu.
+        depense.setNumeroRecu("TEMP-" + UUID.randomUUID());
 
-        // IDENTITY (voir Depense.id) : l'id est généré dès ce premier save (INSERT immédiat), ce qui
-        // permet de construire le numéro de reçu à partir de lui, puis de le poser par un second save
-        // (UPDATE) dans la même transaction — pas besoin d'un compteur séparé ni d'une table Recu
-        // dédiée, une dépense correspondant toujours à exactement un reçu.
         Depense saved = depenseRepository.save(depense);
         saved.setNumeroRecu("DEP-" + LocalDate.now().getYear() + "-" + String.format("%05d", saved.getId()));
-        saved.setDateEmissionRecu(LocalDate.now());
         Depense avecRecu = depenseRepository.save(saved);
 
         return DepenseMapper.toResponseDto(avecRecu);
