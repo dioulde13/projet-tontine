@@ -21,6 +21,7 @@ public class DepenseMapper {
                 depense.getMontant(),
                 depense.getMotif(),
                 depense.getDate(),
+                depense.getNomComptable(),
                 depense.getNumeroRecu(),
                 depense.getDateEmissionRecu(),
                 depense.getCreatedAt(),

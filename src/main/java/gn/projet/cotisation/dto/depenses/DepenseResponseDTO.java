@@ -12,6 +12,7 @@ public record DepenseResponseDTO(
         BigDecimal montant,
         String motif,
         LocalDate date,
+        String nomComptable,
         String numeroRecu,
         LocalDate dateEmissionRecu,
         // Audit (voir BaseEntity) : une dépense n'est jamais modifiée après création, donc seul le

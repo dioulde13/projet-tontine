@@ -60,4 +60,9 @@ public class Depense extends BaseEntity {
 
     @Column(nullable = false)
     private LocalDate dateEmissionRecu;
+
+    // Personne ayant effectivement retiré l'argent de la caisse pour cette dépense (imprimé sur le
+    // reçu) — pas forcément le président qui enregistre, ni un Utilisateur du système.
+    @Column(nullable = false, length = 150)
+    private String nomComptable;
 }

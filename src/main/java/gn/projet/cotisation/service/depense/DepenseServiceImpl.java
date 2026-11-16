@@ -55,6 +55,7 @@ public class DepenseServiceImpl implements DepenseService {
         depense.setMontant(dto.montant());
         depense.setMotif(dto.motif());
         depense.setDate(dto.date());
+        depense.setNomComptable(dto.nomComptable());
         depense.setDateEmissionRecu(LocalDate.now());
         // numeroRecu est NOT NULL + UNIQUE mais dépend de l'id, inconnu avant le premier INSERT
         // (GenerationType.IDENTITY). On pose un placeholder unique le temps de cet INSERT, puis on le
